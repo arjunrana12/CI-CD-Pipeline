@@ -5,7 +5,36 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:name: CI/CD Pipeline
+
+on: 
+  push:
+
 permissions:
+  contents: write
+
+jobs:
+  build-test-deploy:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'  # Or your preferred version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
   contents: write
 
 jobs:
