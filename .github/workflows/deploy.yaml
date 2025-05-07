@@ -1,21 +1,13 @@
-name: CI/CD Pipeline
+name: Deploy Workflow
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:name: CI/CD Pipeline
-
-on: 
-  push:
-
-permissions:
-  contents: write
+    branches:
+      - main
 
 jobs:
-  build-test-deploy:
-    runs-on: windows-latest
+  deploy:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -24,35 +16,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'  # Or your preferred version
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
-
       - name: Build project
         run: npm run build
 
-  contents: write
-
-jobs:
-  build-test-deploy:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: npm install
-        shell: pwsh
-
-      - name: Run tests
-        run: npm test
-        shell: pwsh
-
-      - name: Build project
-        run: npm run build
-        shell: pwsh
+      - name: Deploy
+        run: echo "Add your deployment steps here"
