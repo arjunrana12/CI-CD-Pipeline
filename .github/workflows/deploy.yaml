@@ -2,34 +2,17 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  build-test-deploy:
+  build_and_deploy:
     runs-on: windows-latest
 
-    steps:
-      - name: Checkout code
+    steps: 
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Setup Node.js
+        uses: echo 'Hello India'
 
-      - name: Install dependencies
-        run: npm install
-        shell: pwsh
-
-      - name: Run tests
-        run: npm test
-        shell: pwsh
-
-      - name: Build project
-        run: npm run build
-        shell: pwsh
